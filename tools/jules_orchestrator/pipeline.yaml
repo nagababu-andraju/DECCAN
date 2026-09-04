@@ -2,38 +2,422 @@
 
 stages:
   - name: "Vertical Slice"
-    description: "Implement the first playable target."
+    description: "Implement the complete DECCAN HEAT vertical slice defined by the repository specifications."
     tasks:
-      - id: "vs-architecture"
-        prompt: "Establish base player controller and camera."
+      - id: "prompt-1-vertical-slice"
+        prompt: |
+          Read AGENTS.md and all current project documentation before making changes.
+
+          Implement the complete DECCAN HEAT vertical slice defined by the repository specifications.
+
+          The purpose of this task is to prove the full gameplay loop rather than maximize content.
+
+          Build one polished Hyderabad-inspired fictional district with enough road network, alleys, buildings, traffic space and mission locations to demonstrate the game.
+
+          Use legally safe procedural, primitive, generated or clearly redistributable placeholder assets where final production assets do not yet exist.
+
+          Implement:
+
+          * third-person movement
+          * camera
+          * touchscreen controls
+          * interaction system
+          * vehicle entry and exit
+          * one working car
+          * one working motorcycle or auto-rickshaw
+          * basic vehicle damage
+          * simple traffic
+          * pedestrians
+          * basic NPC reactions
+          * health
+          * simple melee
+          * basic ranged combat
+          * basic police response
+          * Heat/wanted system
+          * money
+          * minimap
+          * objective navigation
+          * mission checkpoints
+          * save/load
+          * day/night
+          * pause menu
+          * graphics settings
+          * five complete missions
+
+          The five missions must exercise substantially different combinations of gameplay systems.
+
+          Do not implement five variants of the same mission.
+
+          Add automated tests and validation wherever practical.
+
+          Profile the vertical slice and document known performance problems.
+
+          Do not expand to the complete world until the vertical-slice gameplay loop is working.
+
+          At completion update BACKLOG.md, CHANGELOG.md, QUALITY_GATES.md and the project status report.
         dependencies: []
         parallel_safe: false
-      - id: "vs-traffic"
-        prompt: "Implement basic pedestrian and traffic AI."
-        dependencies: ["vs-architecture"]
-        parallel_safe: true
-      - id: "vs-missions"
-        prompt: "Create 5 demonstration missions."
-        dependencies: ["vs-traffic"]
-        parallel_safe: true
-        validation_command: "bash tools/mission_validator.sh"
 
-  - name: "Expanded World"
-    description: "Expand to 3 districts and implement economy."
+  - name: "World Streaming and Six-District City"
+    description: "Expand the environment architecture into the complete V1 DECCAN HEAT city."
     tasks:
-      - id: "ew-economy"
-        prompt: "Implement Money, Garages, Shops."
-        dependencies: ["vs-missions"]
+      - id: "prompt-2-world-streaming"
+        prompt: |
+          Read AGENTS.md and preserve all vertical-slice functionality.
+
+          Expand the environment architecture into the complete V1 DECCAN HEAT city.
+
+          Implement six distinct interconnected districts based on the WORLD_BIBLE.
+
+          The game city should be a compressed fictionalized interpretation of Hyderabad rather than a meter-for-meter copy.
+
+          Create a streaming architecture suitable for mobile.
+
+          Use world sectors/chunks, LODs, pooled props and scalable simulation distances.
+
+          Design major road loops and connections so that driving across the city is enjoyable.
+
+          Include appropriate combinations of:
+
+          * dense historical-style streets
+          * bazaars
+          * residential streets
+          * apartments
+          * offices
+          * technology/business district
+          * upscale hill roads
+          * flyovers
+          * lakefront roads
+          * highways
+          * industrial areas
+          * garages
+          * safehouses
+          * mission locations
+          * police facilities
+          * shops
+          * shortcuts
+          * alleys
+
+          Create distant visual landmarks that aid navigation.
+
+          Ensure mission systems continue to function correctly when sectors unload and reload.
+
+          Add streaming tests and performance instrumentation.
+
+          Update world documentation and performance budgets.
+        dependencies: ["prompt-1-vertical-slice"]
         parallel_safe: false
 
-  - name: "100-Mission Release"
-    description: "Content lock and final polish."
+  - name: "Vehicle and Traffic System"
+    description: "Turn the current vehicle prototype into a reusable mobile production system."
     tasks:
-      - id: "release-missions"
-        prompt: "Complete the remaining mission definitions up to 100."
-        dependencies: ["ew-economy"]
+      - id: "prompt-3-vehicle-traffic"
+        prompt: |
+          Turn the current vehicle prototype into a reusable mobile production system.
+
+          Create multiple vehicle classes with tunable data rather than duplicated vehicle scripts.
+
+          Support approximately:
+
+          * compact cars
+          * sedans
+          * hatchbacks
+          * SUVs
+          * vans
+          * performance cars
+          * motorcycles
+          * scooters
+          * auto-rickshaws
+          * police vehicles
+
+          Target roughly 25 distinct gameplay vehicle configurations for V1.
+
+          Implement:
+
+          * acceleration
+          * braking
+          * steering
+          * handbrake
+          * reverse
+          * suspension
+          * traction tuning
+          * vehicle health
+          * collisions
+          * damage states
+          * entry/exit
+          * camera
+          * headlights
+          * horn
+          * AI driving
+          * traffic lights where useful
+          * traffic spawning/despawning
+          * vehicle pooling
+          * stuck-vehicle recovery
+          * police pursuit behavior
+
+          Use simplified mobile physics where visual fidelity produces little gameplay value.
+
+          Build automated validation ensuring every registered vehicle can spawn and initialize correctly.
+
+          Profile CPU and physics cost.
+        dependencies: ["prompt-2-world-streaming"]
+        parallel_safe: false
+
+  - name: "Living City NPC System"
+    description: "Expand pedestrians and NPC simulation into a scalable mobile city system."
+    tasks:
+      - id: "prompt-4-npc-system"
+        prompt: |
+          Expand pedestrians and NPC simulation into a scalable mobile city system.
+
+          Implement reusable archetypes and state-driven behavior including:
+
+          * walking
+          * wandering
+          * waiting
+          * crossing roads
+          * conversation/idling
+          * reacting to vehicles
+          * reacting to collisions
+          * reacting to combat
+          * fleeing
+          * calling/responding to authorities where appropriate
+          * surrender/fear behavior
+          * mission-specific behavior
+
+          NPC simulation must degrade gracefully with distance.
+
+          Use pooled characters and animation/AI LOD strategies.
+
+          Avoid expensive full AI simulation for distant NPCs.
+
+          Create population density profiles appropriate to different districts and times of day.
+
+          Ensure civilians, mission NPCs and police are distinct gameplay categories.
+
+          Add stress tests with increasing NPC counts and document safe mobile budgets.
+        dependencies: ["prompt-2-world-streaming"]
         parallel_safe: true
-        validation_command: "bash tools/mission_validator.sh"
+
+  - name: "Combat, Police and Heat System"
+    description: "Build a polished but mobile-efficient combat and law-enforcement gameplay loop."
+    tasks:
+      - id: "prompt-5-combat-heat"
+        prompt: |
+          Build a polished but mobile-efficient combat and law-enforcement gameplay loop.
+
+          Implement:
+
+          * melee
+          * aiming
+          * ranged weapons
+          * reload
+          * ammunition
+          * hit reactions
+          * player health
+          * armor
+          * damage
+          * death/restart
+          * NPC combat
+          * cover awareness where practical
+          * combat audio hooks
+
+          Create a Heat system from 0 to 5.
+
+          Heat escalation should influence:
+
+          * police awareness
+          * patrol response
+          * pursuit vehicles
+          * search radius
+          * reinforcements
+          * tactical aggression
+
+          Implement believable loss-of-sight/search behavior rather than continuously knowing the player's exact location.
+
+          The system must integrate with missions.
+
+          Add debugging tools that visualize AI state, pursuit state and Heat calculations.
+
+          Add automated tests for escalation and de-escalation.
+        dependencies: ["prompt-3-vehicle-traffic", "prompt-4-npc-system"]
+        parallel_safe: false
+
+  - name: "Production Mission Engine"
+    description: "Build the production-ready data-driven mission system required to support at least 100 missions without adding custom code for ordinary mission logic."
+    tasks:
+      - id: "prompt-6-mission-engine"
+        prompt: |
+          Treat this as a critical architecture task.
+
+          Build the production-ready data-driven mission system required to support at least 100 missions without adding custom code for ordinary mission logic.
+
+          Implement reusable objective primitives specified in MISSION_SYSTEM.md.
+
+          Support:
+
+          * sequential objectives
+          * parallel objectives
+          * optional objectives
+          * branching
+          * prerequisites
+          * checkpoints
+          * failure
+          * retry
+          * timers
+          * rewards
+          * dialogue
+          * vehicle requirements
+          * NPC references
+          * Heat-state objectives
+          * combat objectives
+          * world-state conditions
+          * mission unlock chains
+          * analytics IDs
+
+          Create authoring validation.
+
+          Create a mission dependency graph.
+
+          Create an automated mission-linter that detects:
+
+          * missing references
+          * missing destinations
+          * unreachable objectives
+          * invalid dependencies
+          * circular unlock requirements
+          * missing rewards
+          * missing failure handling
+          * impossible vehicle/NPC references
+
+          Create debug tools allowing developers to immediately:
+
+          * start any mission
+          * jump to any objective
+          * complete an objective
+          * fail an objective
+          * teleport to objective
+          * inspect mission variables
+
+          Convert the five vertical-slice missions to this system.
+
+          No core gameplay system should depend on specific mission IDs.
+        dependencies: ["prompt-1-vertical-slice"]
+        parallel_safe: false
+
+  - name: "Narrative and 100-Mission Plan"
+    description: "Create the complete V1 narrative plan and 100 mission design records."
+    tasks:
+      - id: "prompt-7-narrative-plan"
+        prompt: |
+          Do not implement all missions yet.
+
+          Create the complete V1 narrative plan.
+
+          Develop an original protagonist, supporting cast, rivals and fictional organizations appropriate for DECCAN HEAT.
+
+          Avoid copying existing game plots or characters.
+
+          Avoid making real communities, religions, political parties or identifiable real organizations villains.
+
+          Create a coherent progression through the six districts.
+
+          Design exactly 100 playable missions divided approximately into:
+
+          30 main-story missions
+          40 substantial side missions
+          30 contracts/activities
+
+          Create a mission design record for every mission containing:
+
+          * ID
+          * title
+          * district
+          * unlock conditions
+          * story purpose
+          * characters
+          * opening situation
+          * objectives
+          * required systems
+          * escalation/twist
+          * completion
+          * reward
+          * estimated duration
+          * replay considerations
+
+          Maintain variety.
+
+          Use combinations of activities such as:
+
+          driving
+          chases
+          races
+          delivery
+          investigation
+          photography
+          tracking
+          stealth
+          rescue
+          escort
+          defense
+          combat
+          vehicle theft
+          timed traversal
+          escape
+          pursuit
+          business activities
+          social interactions
+          multi-stage operations
+
+          Do not produce dozens of superficial drive-there-and-shoot missions.
+
+          Run a similarity audit and flag missions that are structurally too close to another mission.
+
+          Generate the complete narrative dependency graph before implementing the content.
+        dependencies: ["prompt-6-mission-engine"]
+        parallel_safe: true
+
+  - name: "Complete Player Experience"
+    description: "Implement polished mobile-first HUD, UI, and menus."
+    tasks:
+      - id: "prompt-8-ux"
+        prompt: |
+          Read the current project and complete the game-facing UX.
+
+          Implement polished mobile-first:
+
+          * HUD
+          * minimap
+          * navigation
+          * objective display
+          * Heat indicator
+          * health/armor
+          * money
+          * weapon/inventory interface
+          * vehicle UI
+          * mission results
+          * mission retry
+          * pause
+          * settings
+          * graphics quality selection
+          * audio settings
+          * control customization
+          * sensitivity
+          * accessibility options
+          * subtitles
+          * save slots if architecture permits
+
+          The interface must have its own DECCAN HEAT visual language.
+
+          Do not imitate GTA V or GTA VI interface layouts, typography or graphics.
+
+          Optimize for different mobile aspect ratios and safe areas.
+
+          Support touch and gamepad input.
+
+          Test interface scaling automatically across representative screen sizes.
+        dependencies: ["prompt-1-vertical-slice"]
+        parallel_safe: true
 
 retry_policy:
   max_retries: 3
