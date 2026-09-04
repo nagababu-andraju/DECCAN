@@ -1,0 +1,37 @@
+name: Build Android
+
+on:
+  push:
+    tags:
+      - 'v*' # Trigger on version tags
+  workflow_dispatch: # Allow manual trigger for dev builds
+
+jobs:
+  build-android:
+    name: Build Android APK/AAB
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # GameCI is used here for building
+      - name: Build Android
+        uses: game-ci/unity-builder@v2.0-alpha-6
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: .
+          targetPlatform: Android
+          buildName: DeccanHeat
+          # We use environment variables or secrets for keystore details in a real scenario
+          # androidKeystoreName: user.keystore
+          # androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          # androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+          # androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
+          # androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: DeccanHeat-Android
+          path: build/Android

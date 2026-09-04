@@ -1,0 +1,44 @@
+# Jules Orchestrator Pipeline Configuration
+
+stages:
+  - name: "Vertical Slice"
+    description: "Implement the first playable target."
+    tasks:
+      - id: "vs-architecture"
+        prompt: "Establish base player controller and camera."
+        dependencies: []
+        parallel_safe: false
+      - id: "vs-traffic"
+        prompt: "Implement basic pedestrian and traffic AI."
+        dependencies: ["vs-architecture"]
+        parallel_safe: true
+      - id: "vs-missions"
+        prompt: "Create 5 demonstration missions."
+        dependencies: ["vs-traffic"]
+        parallel_safe: true
+        validation_command: "bash tools/mission_validator.sh"
+
+  - name: "Expanded World"
+    description: "Expand to 3 districts and implement economy."
+    tasks:
+      - id: "ew-economy"
+        prompt: "Implement Money, Garages, Shops."
+        dependencies: ["vs-missions"]
+        parallel_safe: false
+
+  - name: "100-Mission Release"
+    description: "Content lock and final polish."
+    tasks:
+      - id: "release-missions"
+        prompt: "Complete the remaining mission definitions up to 100."
+        dependencies: ["ew-economy"]
+        parallel_safe: true
+        validation_command: "bash tools/mission_validator.sh"
+
+retry_policy:
+  max_retries: 3
+  timeout_seconds: 3600
+
+settings:
+  automatic_plan_approval: true
+  create_pull_requests: true

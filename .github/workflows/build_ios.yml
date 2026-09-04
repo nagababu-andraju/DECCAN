@@ -1,0 +1,32 @@
+name: Build iOS
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    name: Build iOS XCode Project
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Build iOS
+        uses: game-ci/unity-builder@v2.0-alpha-6
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: .
+          targetPlatform: iOS
+          buildName: DeccanHeat
+          # Note: Apple signing credentials and provisioning profiles will need to be configured here.
+          # We document this in UNRESOLVED_REQUIREMENTS.md
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: DeccanHeat-iOS-XcodeProject
+          path: build/iOS
