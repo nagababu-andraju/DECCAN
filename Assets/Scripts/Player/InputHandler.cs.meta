@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: f528fe7d18f244bd9838a2a2a2416373
+MonoImporter:
+  externalObjects: Assets/Scripts/Player/InputHandler.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Player/InputHandler.cs

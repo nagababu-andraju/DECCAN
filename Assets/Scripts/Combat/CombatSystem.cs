@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace DeccanHeat.Combat
 {
     public class CombatSystem : MonoBehaviour
@@ -14,24 +17,7 @@ namespace DeccanHeat.Combat
         public ParticleSystem muzzleFlash;
 
         // Assumes this is on the Player
-        public void OnFire(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                // Simple Raycast Ranged Combat
-                FireWeapon();
-            }
-        }
-
-        public void OnMelee(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                PerformMelee();
-            }
-        }
-
-        private void FireWeapon()
+        public void FireWeapon()
         {
             if (muzzleFlash != null) muzzleFlash.Play();
 

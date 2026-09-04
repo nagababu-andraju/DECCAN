@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+using UnityEngine;
 
 namespace DeccanHeat.CameraSystem
 {
@@ -16,20 +19,30 @@ namespace DeccanHeat.CameraSystem
             target = newTarget;
         }
 
-        public void OnLook(UnityEngine.InputSystem.InputAction.CallbackContext context)
+        public void SetLookInput(Vector2 input)
         {
-            lookInput = context.ReadValue<Vector2>();
+            lookInput = input;
         }
+
+        private float currentYRotation = 0f;
+        private float currentXRotation = 15f;
 
         void LateUpdate()
         {
             if (target == null) return;
 
-            // Simple orbital camera logic
-            transform.RotateAround(target.position, Vector3.up, lookInput.x * rotationSpeed);
+            currentYRotation += lookInput.x * rotationSpeed;
+            currentXRotation -= lookInput.y * rotationSpeed;
+            currentXRotation = Mathf.Clamp(currentXRotation, -10f, 60f); // Prevent flipping
 
-            // Re-calculate offset based on current rotation
-            Vector3 desiredPosition = target.position + (transform.rotation * offset);
+            Quaternion rotation = Quaternion.Euler(currentXRotation, currentYRotation, 0);
+            Vector3 desiredPosition = target.position + rotation * offset;
+
+            // Avoid going under the ground roughly
+            if (desiredPosition.y < target.position.y)
+            {
+                desiredPosition.y = target.position.y + 0.5f;
+            }
 
             transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
             transform.LookAt(target.position + Vector3.up * 1.5f); // Look slightly above the target's origin

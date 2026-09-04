@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace DeccanHeat.Vehicles
 {
     [RequireComponent(typeof(Rigidbody))]
@@ -57,18 +60,12 @@ namespace DeccanHeat.Vehicles
             ApplyBrakes();
         }
 
-        public void OnMove(InputAction.CallbackContext context)
+        public void SetInput(Vector2 move, bool brake)
         {
             if (!isOccupied) return;
-            Vector2 input = context.ReadValue<Vector2>();
-            horizontalInput = input.x;
-            verticalInput = input.y;
-        }
-
-        public void OnBrake(InputAction.CallbackContext context)
-        {
-            if (!isOccupied) return;
-            isBreaking = context.ReadValueAsButton();
+            horizontalInput = move.x;
+            verticalInput = move.y;
+            isBreaking = brake;
         }
 
         private void FixedUpdate()

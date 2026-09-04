@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace DeccanHeat.Missions
@@ -107,6 +110,14 @@ namespace DeccanHeat.Missions
             else
             {
                 UpdateObjectiveUI();
+            }
+        }
+
+        public void RetryMission()
+        {
+            if (currentMission != null)
+            {
+                StartMission(currentMission);
             }
         }
 

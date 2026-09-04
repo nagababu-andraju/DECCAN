@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using UnityEngine;
+using UnityEngine.InputSystem;
+
 namespace DeccanHeat.Player
 {
     [RequireComponent(typeof(CharacterController))]
@@ -32,32 +35,29 @@ namespace DeccanHeat.Player
             controller = GetComponent<CharacterController>();
         }
 
-        // Input Actions (Assuming generic Vector2 move and bool jump)
-        public void OnMove(InputAction.CallbackContext context)
+        // Raw Input Methods for InputHandler routing
+        public void SetMovementInput(Vector2 input)
         {
-            movementInput = context.ReadValue<Vector2>();
+            movementInput = input;
         }
 
-        public void OnJump(InputAction.CallbackContext context)
+        public void DoJump()
         {
-            if (context.performed && isGrounded && !isDriving)
+            if (isGrounded && !isDriving)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
         }
 
-        public void OnInteract(InputAction.CallbackContext context)
+        public void DoInteract()
         {
-            if (context.performed)
+            if (isDriving)
             {
-                if (isDriving)
-                {
-                    ExitVehicle();
-                }
-                else
-                {
-                    TryEnterVehicle();
-                }
+                ExitVehicle();
+            }
+            else
+            {
+                TryEnterVehicle();
             }
         }
 
