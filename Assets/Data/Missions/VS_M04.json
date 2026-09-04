@@ -1,0 +1,26 @@
+{
+  "missionID": "VS_M04",
+  "missionTitle": "Target Practice",
+  "description": "Take out the rival gang members lingering in the alley.",
+  "objectives": [
+    {
+      "objectiveType": "GoTo",
+      "targetID": "Dark_Alley",
+      "location": {"x": -80.0, "y": 0.0, "z": -120.0},
+      "completionRadius": 5.0
+    },
+    {
+      "objectiveType": "Eliminate",
+      "targetID": "Gang_Member_01",
+      "location": {"x": -85.0, "y": 0.0, "z": -122.0},
+      "completionRadius": 0.0
+    },
+    {
+      "objectiveType": "Eliminate",
+      "targetID": "Gang_Member_02",
+      "location": {"x": -82.0, "y": 0.0, "z": -125.0},
+      "completionRadius": 0.0
+    }
+  ],
+  "rewardMoney": 2500
+}

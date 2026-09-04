@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: fb31a7b08ba54a3988ba01ae79b2d643
+MonoImporter:
+  externalObjects: Assets/Scripts/Systems/DayNightCycle.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Systems/DayNightCycle.cs

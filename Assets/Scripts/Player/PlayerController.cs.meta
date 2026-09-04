@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: e9e0f4e7764b455086c6badb4c8ff4e9
+MonoImporter:
+  externalObjects: Assets/Scripts/Player/PlayerController.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Player/PlayerController.cs

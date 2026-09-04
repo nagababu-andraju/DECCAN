@@ -1,0 +1,20 @@
+{
+  "missionID": "VS_M03",
+  "missionTitle": "Heat Warning",
+  "description": "You got spotted by the cops. Shake the heat.",
+  "objectives": [
+    {
+      "objectiveType": "GoTo",
+      "targetID": "Police_Station_Exterior",
+      "location": {"x": 50.0, "y": 0.0, "z": 200.0},
+      "completionRadius": 10.0
+    },
+    {
+      "objectiveType": "LoseHeat",
+      "targetID": "Global_Heat",
+      "location": {"x": 0.0, "y": 0.0, "z": 0.0},
+      "completionRadius": 0.0
+    }
+  ],
+  "rewardMoney": 800
+}

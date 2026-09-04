@@ -1,0 +1,20 @@
+{
+  "missionID": "VS_M05",
+  "missionTitle": "The Drop",
+  "description": "Talk to the contact, secure the package, and deliver it across town.",
+  "objectives": [
+    {
+      "objectiveType": "TalkTo",
+      "targetID": "Informant_NPC",
+      "location": {"x": 20.0, "y": 0.0, "z": 45.0},
+      "completionRadius": 2.0
+    },
+    {
+      "objectiveType": "GoTo",
+      "targetID": "Drop_Location",
+      "location": {"x": 300.0, "y": 0.0, "z": 300.0},
+      "completionRadius": 3.0
+    }
+  ],
+  "rewardMoney": 5000
+}

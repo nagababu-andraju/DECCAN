@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: d5785d10ab754d8a934631c772da8354
+MonoImporter:
+  externalObjects: Assets/Scripts/Systems/SaveLoadManager.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Systems/SaveLoadManager.cs

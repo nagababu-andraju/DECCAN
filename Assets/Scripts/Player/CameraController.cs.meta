@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: 14bac41afd4a45fdb88fe08327b66db3
+MonoImporter:
+  externalObjects: Assets/Scripts/Player/CameraController.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Player/CameraController.cs

@@ -1,0 +1,26 @@
+{
+  "missionID": "VS_M01",
+  "missionTitle": "Welcome to Deccan",
+  "description": "Learn the ropes of the city. Head to your safehouse and grab a ride.",
+  "objectives": [
+    {
+      "objectiveType": "GoTo",
+      "targetID": "Safehouse_Marker",
+      "location": {"x": 10.0, "y": 0.0, "z": 15.0},
+      "completionRadius": 2.0
+    },
+    {
+      "objectiveType": "EnterVehicle",
+      "targetID": "Any_Vehicle",
+      "location": {"x": 0.0, "y": 0.0, "z": 0.0},
+      "completionRadius": 0.0
+    },
+    {
+      "objectiveType": "GoTo",
+      "targetID": "Bazaar_Market",
+      "location": {"x": 150.0, "y": 0.0, "z": -40.0},
+      "completionRadius": 5.0
+    }
+  ],
+  "rewardMoney": 500
+}

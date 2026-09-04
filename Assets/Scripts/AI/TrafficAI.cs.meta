@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: d4ddf2cb747c4cbd8ef079616abfc13d
+MonoImporter:
+  externalObjects: Assets/Scripts/AI/TrafficAI.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/AI/TrafficAI.cs

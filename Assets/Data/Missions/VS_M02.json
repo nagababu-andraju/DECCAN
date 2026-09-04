@@ -1,0 +1,20 @@
+{
+  "missionID": "VS_M02",
+  "missionTitle": "Joyride",
+  "description": "Drive an Auto-Rickshaw to the drop-off point before the time runs out.",
+  "objectives": [
+    {
+      "objectiveType": "EnterVehicle",
+      "targetID": "AutoRickshaw_01",
+      "location": {"x": 150.0, "y": 0.0, "z": -40.0},
+      "completionRadius": 0.0
+    },
+    {
+      "objectiveType": "GoTo",
+      "targetID": "ChopShop_Garage",
+      "location": {"x": -200.0, "y": 0.0, "z": 80.0},
+      "completionRadius": 5.0
+    }
+  ],
+  "rewardMoney": 1200
+}

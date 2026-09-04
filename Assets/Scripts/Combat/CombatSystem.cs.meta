@@ -1,0 +1,6 @@
+fileFormatVersion: 2
+guid: 0b8a67ded53840008285150d9db1f234
+MonoImporter:
+  externalObjects: Assets/Scripts/Combat/CombatSystem.cs
+  serializedVersion: 2
+  iconMap: Assets/Scripts/Combat/CombatSystem.cs
