@@ -419,6 +419,380 @@ stages:
         dependencies: ["prompt-1-vertical-slice"]
         parallel_safe: true
 
+  - name: "Mission Implementation Batch"
+    description: "Implement a specific range of missions from the approved DECCAN HEAT 100-mission design."
+    tasks:
+      - id: "prompt-9-mission-batch"
+        prompt: |
+          Implement missions [MISSION RANGE] from the approved DECCAN HEAT 100-mission design.
+
+          Do not modify the core mission engine unless an actual engine defect prevents implementation.
+
+          Do not modify missions outside your assigned range.
+
+          Each mission must use the existing data-driven mission architecture wherever possible.
+
+          For every assigned mission:
+
+          1. implement its complete mission definition,
+          2. connect dialogue,
+          3. connect NPC and vehicle references,
+          4. define checkpoints,
+          5. define failure/retry behavior,
+          6. define rewards,
+          7. add analytics identifiers,
+          8. validate dependencies,
+          9. add automated content validation,
+          10. ensure it can be launched through the mission-debug system.
+
+          Use reusable gameplay systems.
+
+          Do not create mission-specific copies of systems already present.
+
+          If a genuinely new reusable objective type is required, document it rather than silently implementing a bespoke workaround.
+
+          Run the mission linter over the completed batch.
+
+          Produce a completion matrix showing the status of every mission in the assigned range.
+        dependencies: ["prompt-7-narrative-plan"]
+        parallel_safe: true
+
+  - name: "Integrate All 100 Missions"
+    description: "Integrate and validate the complete 100-mission DECCAN HEAT catalog."
+    tasks:
+      - id: "prompt-10-integrate-missions"
+        prompt: |
+          Integrate and validate the complete 100-mission DECCAN HEAT catalog.
+
+          Do not redesign functioning missions simply for stylistic preference.
+
+          Run:
+
+          * schema validation
+          * reference validation
+          * mission graph validation
+          * unlock-chain validation
+          * reward validation
+          * content completeness validation
+          * structural similarity analysis
+
+          Confirm exactly 100 playable missions exist.
+
+          Verify there is no mission progression dead end.
+
+          Verify a new save can reach the final story mission through valid progression.
+
+          Create automated traversal/simulation of mission unlock state where possible.
+
+          Produce:
+
+          MISSION_CATALOG_FINAL.md
+          MISSION_DEPENDENCY_GRAPH
+          MISSION_VALIDATION_REPORT.md
+
+          Any broken mission must be repaired before declaring this stage complete.
+        dependencies: ["prompt-9-mission-batch"]
+        parallel_safe: false
+
+  - name: "Economy and Progression"
+    description: "Build a balanced single-player economy."
+    tasks:
+      - id: "prompt-11-economy"
+        prompt: |
+          Build a balanced single-player economy.
+
+          Implement:
+
+          * mission rewards
+          * vehicle acquisition
+          * garages
+          * clothing/customization
+          * consumable spending where appropriate
+          * business/property progression where appropriate
+          * progression unlocks
+          * difficulty progression
+
+          The base game must remain enjoyable without spending real money.
+
+          Do not design intentionally frustrating progression to force purchases or ad viewing.
+
+          Create economy simulation tools capable of estimating player earnings and spending over representative playthroughs.
+
+          Check for exploits and progression blockers.
+        dependencies: ["prompt-10-integrate-missions"]
+        parallel_safe: false
+
+  - name: "Ads and In-App Purchases"
+    description: "Add commercial monetization architecture for Android and iOS."
+    tasks:
+      - id: "prompt-12-monetization"
+        prompt: |
+          Add commercial monetization architecture for Android and iOS.
+
+          Keep all advertising and purchasing behind interfaces so platform SDKs remain replaceable and testable.
+
+          Support development/test mode.
+
+          Implement optional rewarded-ad placements at natural moments such as:
+
+          * optional one-time mission revive
+          * optional post-mission bonus
+          * optional bonus reward
+
+          Avoid aggressive advertising during active gameplay.
+
+          Add configurable frequency caps.
+
+          Implement in-app purchase architecture for:
+
+          * Remove Ads
+          * cosmetic packs
+          * optional vehicle/customization packs
+          * future mission expansion packs
+
+          Avoid randomized paid loot boxes.
+
+          Do not make core story completion dependent on purchases.
+
+          Use the required platform billing mechanisms for digital content.
+
+          Purchases must:
+
+          * validate success before granting goods
+          * safely handle interrupted purchases
+          * restore restorable purchases
+          * prevent duplicate grants
+          * record relevant telemetry without storing sensitive payment data
+
+          Never insert production advertising IDs or payment credentials into source control.
+
+          Create configuration placeholders and clear release instructions.
+        dependencies: ["prompt-11-economy"]
+        parallel_safe: true
+
+  - name: "Analytics and Live Product Foundation"
+    description: "Implement privacy-conscious analytics interfaces."
+    tasks:
+      - id: "prompt-13-analytics"
+        prompt: |
+          Implement privacy-conscious analytics interfaces.
+
+          Track useful product events including:
+
+          * install/start
+          * session duration
+          * mission started
+          * mission completed
+          * mission failed
+          * mission abandoned
+          * death
+          * vehicle use
+          * district engagement
+          * progression
+          * rewarded-ad choice
+          * purchase funnel
+          * performance tier
+          * crashes
+
+          Do not collect information merely because it is available.
+
+          Provide centralized event definitions rather than analytics calls scattered unpredictably through gameplay code.
+
+          Build remote-configuration hooks for safe tunable values such as:
+
+          * mission rewards
+          * economy balance
+          * ad frequency
+          * graphics defaults
+
+          Do not permit remote configuration to download and execute arbitrary code.
+        dependencies: ["prompt-11-economy"]
+        parallel_safe: true
+
+  - name: "Mobile Performance Pass"
+    description: "Systematically optimize all major systems for target mobile hardware."
+    tasks:
+      - id: "prompt-14-performance"
+        prompt: |
+          Treat performance as the primary objective of this task.
+
+          Profile all major systems.
+
+          Identify CPU, GPU, memory, rendering, physics, AI, garbage-collection and loading bottlenecks.
+
+          Optimize systematically.
+
+          Implement quality tiers and device-aware defaults.
+
+          Audit:
+
+          * draw calls
+          * batches
+          * materials
+          * shaders
+          * lights
+          * shadows
+          * particles
+          * physics bodies
+          * raycasts
+          * NPC AI
+          * traffic AI
+          * animation
+          * texture memory
+          * meshes
+          * audio memory
+          * scene streaming
+          * Addressables
+          * garbage collection
+          * allocations
+
+          Preserve gameplay behavior while optimizing.
+
+          Produce PERFORMANCE_FINAL.md containing measurable before/after results.
+
+          The game should prioritize stable frame pacing over unnecessary visual effects.
+        dependencies: ["prompt-10-integrate-missions"]
+        parallel_safe: false
+
+  - name: "Autonomous Gameplay QA"
+    description: "Build automated and semi-automated gameplay QA infrastructure."
+    tasks:
+      - id: "prompt-15-qa-bots"
+        prompt: |
+          Build automated and semi-automated gameplay QA infrastructure.
+
+          Create bot/test-controller capability able to exercise representative gameplay without a human.
+
+          Where practical test:
+
+          * spawn
+          * movement
+          * vehicle entry
+          * driving
+          * vehicle exit
+          * combat
+          * death
+          * respawn
+          * Heat escalation
+          * Heat escape
+          * mission start
+          * mission checkpoints
+          * mission completion
+          * mission failure
+          * mission retry
+          * save
+          * reload
+          * district transitions
+
+          Create long-duration soak tests.
+
+          Run randomized sequences looking for:
+
+          * exceptions
+          * null references
+          * stuck missions
+          * invalid navigation
+          * NPC explosions
+          * runaway spawning
+          * memory growth
+          * unbounded object counts
+          * save corruption
+
+          Automatically produce QA reports.
+        dependencies: ["prompt-10-integrate-missions"]
+        parallel_safe: true
+
+  - name: "Complete Game Audit"
+    description: "Hostile release audit."
+    tasks:
+      - id: "prompt-16-audit"
+        prompt: |
+          Act as a hostile release auditor.
+
+          Assume DECCAN HEAT is scheduled to ship commercially.
+
+          Search the entire repository and game content for:
+
+          * incomplete systems
+          * placeholder functionality
+          * TODOs
+          * broken references
+          * inaccessible missions
+          * duplicated systems
+          * debug cheats exposed in production
+          * performance regressions
+          * missing save handling
+          * monetization defects
+          * privacy concerns
+          * copyrighted/unlicensed assets
+          * unsupported dependencies
+          * crash paths
+          * insecure secrets
+          * missing platform configuration
+          * poor touch UX
+          * inconsistent UI
+          * inaccessible content
+
+          Repair issues that can be safely repaired.
+
+          Do not merely write an audit report.
+
+          After repairs, rerun the complete automated validation suite.
+        dependencies: ["prompt-12-monetization", "prompt-13-analytics", "prompt-14-performance", "prompt-15-qa-bots"]
+        parallel_safe: false
+
+  - name: "Release Candidate"
+    description: "Prepare DECCAN HEAT Release Candidate 1."
+    tasks:
+      - id: "prompt-17-release-candidate"
+        prompt: |
+          Prepare DECCAN HEAT Release Candidate 1.
+
+          The candidate must contain the complete intended V1 experience.
+
+          Verify:
+
+          * complete playable world
+          * six districts
+          * exactly 100 missions
+          * progression
+          * vehicles
+          * pedestrians
+          * traffic
+          * police
+          * combat
+          * Heat system
+          * economy
+          * save/load
+          * UI
+          * settings
+          * mobile controls
+          * monetization test integration
+          * analytics
+          * performance configuration
+
+          Build Android testing artifacts.
+
+          Build the Android App Bundle configuration required for store release.
+
+          Prepare the iOS project/build pipeline and execute it where appropriate signing infrastructure is available.
+
+          Generate:
+
+          FINAL_BUILD_REPORT.md
+          FINAL_QA_REPORT.md
+          PERFORMANCE_FINAL.md
+          KNOWN_ISSUES.md
+          STORE_RELEASE_CHECKLIST.md
+
+          Do not submit anything publicly.
+
+          The final pipeline state should become HUMAN_FINAL_REVIEW_REQUIRED.
+
+          This is the first point at which the project should deliberately stop for my product review.
+        dependencies: ["prompt-16-audit"]
+        parallel_safe: false
+
 retry_policy:
   max_retries: 3
   timeout_seconds: 3600
